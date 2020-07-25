@@ -1,15 +1,10 @@
-package main
+package markov
 
 import (
 	"bufio"
-	"flag"
-	"fmt"
 	"io"
-	"log"
 	"math/rand"
-	"os"
 	"strings"
-	"time"
 )
 
 // Prefix is a chain of one or more words.
@@ -68,26 +63,4 @@ func (c *Chain) Generate(n int) string {
 		p.Shift(next)
 	}
 	return strings.Join(words, " ")
-}
-
-func main() {
-	corpFile := flag.String("corpus", "", "path to corpus file")
-	numWords := flag.Int("words", 100, "maximum number of words to print")
-	prefixLen := flag.Int("prefix", 2, "prefix length in words")
-
-	flag.Parse()
-	rand.Seed(time.Now().UnixNano())
-
-	f, err := os.Open(*corpFile)
-	defer f.Close()
-	if err != nil {
-		log.Fatalf("Failed to open corpFile: %v", err)
-	}
-
-	c := NewChain(bufio.NewReader(f), *prefixLen)
-	for {
-		fmt.Println(c.Generate(*numWords))
-		fmt.Println("Press any key to continue ...")
-		fmt.Scanln()
-	}
 }
