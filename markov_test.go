@@ -1,4 +1,4 @@
-package main
+package markov
 
 import (
 	"bufio"
@@ -27,7 +27,7 @@ func TestNewChain(t *testing.T) {
 	for _, test := range tests {
 		br := bufio.NewReader(strings.NewReader(test.corpus))
 		c := NewChain(br, test.prefixLen)
-		if diff := cmp.Diff(test.chain, c.chain); diff != "" {
+		if diff := cmp.Diff(test.chain, c.Chain); diff != "" {
 			t.Errorf("Chains do not match: diff=%s", diff)
 		}
 	}

@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// Prefix is a chain of one or more words.
+// Prefix is a sequence of one or more words.
 type Prefix []string
 
 // String returns the Prefix as a string.
@@ -25,8 +25,8 @@ func (p Prefix) Shift(word string) {
 // A prefix is a string of prefixLen words joined with spaces.
 // A suffix is a single word. A prefix can have multiple suffixes.
 type Chain struct {
-	chain     map[string][]string
-	prefixLen int
+	Chain     map[string][]string
+	PrefixLen int
 }
 
 // NewChain returns a new Chain built from the provided Reader.
@@ -35,11 +35,11 @@ type Chain struct {
 func NewChain(br *bufio.Reader, prefixLen int) *Chain {
 	c := &Chain{make(map[string][]string), prefixLen}
 	for {
-		p := make(Prefix, c.prefixLen)
+		p := make(Prefix, c.PrefixLen)
 		line, err := br.ReadString('\n')
 		for _, w := range strings.Split(line, " ") {
 			key := p.String()
-			c.chain[key] = append(c.chain[key], w)
+			c.Chain[key] = append(c.Chain[key], w)
 			p.Shift(w)
 		}
 		if err == io.EOF {
@@ -51,15 +51,15 @@ func NewChain(br *bufio.Reader, prefixLen int) *Chain {
 
 // Generate returns a string of at most n words generated from Chain.
 func (c *Chain) Generate(n int) string {
-	p := make(Prefix, c.prefixLen)
-	var words []string
+	p := make(Prefix, c.PrefixLen)
+	words := make([]string, n)
 	for i := 0; i < n; i++ {
-		choices := c.chain[p.String()]
+		choices := c.Chain[p.String()]
 		if len(choices) == 0 {
 			break
 		}
 		next := choices[rand.Intn(len(choices))]
-		words = append(words, next)
+		words[i] = next
 		p.Shift(next)
 	}
 	return strings.Join(words, " ")
