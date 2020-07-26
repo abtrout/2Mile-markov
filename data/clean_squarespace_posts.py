@@ -69,6 +69,23 @@ if __name__ == "__main__":
         "NOTE:",
         "LIMITED SEATING",
         "The second annual Mill Valley Surf Film",
+        "Massive Surfboard and SUP sale",
+        "Just a reminder to pack your",
+        "We're cleaning house",
+        "Customer Appreciation Sale",
+        "Thank You! Our sincere thanks for",
+        "Join us Thanksgiving",
+        "Adult Surf Camp will be offered",
+        "Important Note from the Bolinas Fishing Community",
+        "Intermediate Surf Clinic",
+        "This Saturday - 8/17/2013",
+        "Strewnfield by Thomas Campbell",
+        "This Saturday - 6/15/2013",
+        "We still have a few open spots",
+        "The Mill Valley Surf Film",
+        "This week! All the details here",
+        "The Kahuna Kupuna is the",
+        "John Doe and Rambin' Jack Elliott",
     ]
     # Parse each HTML post separately and save text to another file.
     raw_dir = "squarespace_raw"
