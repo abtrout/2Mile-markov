@@ -49,17 +49,17 @@ func NewChain(br *bufio.Reader, prefixLen int) *Chain {
 	return c
 }
 
-// Generate returns a string of at most n words generated from Chain.
-func (c *Chain) Generate(n int) string {
+// Generate returns a new document generated from Chain.
+func (c *Chain) Generate() string {
 	p := make(Prefix, c.PrefixLen)
-	words := make([]string, n)
-	for i := 0; i < n; i++ {
+	words := []string{}
+	for {
 		choices := c.Chain[p.String()]
 		if len(choices) == 0 {
 			break
 		}
 		next := choices[rand.Intn(len(choices))]
-		words[i] = next
+		words = append(words, next)
 		p.Shift(next)
 	}
 	return strings.Join(words, " ")

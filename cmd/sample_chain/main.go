@@ -14,7 +14,6 @@ import (
 
 func main() {
 	chainFile := flag.String("chainFile", "", "Path to serialized Markov chain to sample")
-	numWords := flag.Int("words", 100, "Maximum number of words to generate per report")
 	randSeed := flag.Int64("randSeed", time.Now().UnixNano(), "Seed for random number generator")
 	flag.Parse()
 
@@ -32,7 +31,7 @@ func main() {
 
 	rand.Seed(*randSeed)
 	for {
-		fmt.Println(chain.Generate(*numWords))
+		fmt.Println(chain.Generate())
 		fmt.Println("Press ENTER to generate a new report...")
 		fmt.Scanln()
 	}
