@@ -8,6 +8,8 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
+// TODO: Add tests for Prefix stuff.
+
 func TestNewChain(t *testing.T) {
 	tests := []struct {
 		corpus    string
